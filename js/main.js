@@ -118,7 +118,7 @@ function result(event) {
   
   
   
-  if (counter == 20) {
+  if (counter == 1) {
     document.getElementById('pi').style.visibility='visible';
   }
 }
