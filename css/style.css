@@ -1,0 +1,38 @@
+header img {
+    width: 15%;
+    float: left;
+}
+
+header {
+    display: inline-block;
+}
+
+header h1 {
+
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    margin-top: 28px;
+}
+
+#left-image{
+
+width: 30%;
+}
+
+#mid-image{
+
+    width: 30%;
+}
+
+#right-image{
+    width: 30%;
+}
+
+li{
+    line-height: 200%;
+    color: brown;
+}
