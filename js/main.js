@@ -7,7 +7,8 @@ function randomNumber(min, max) {
 let leftClick;
 let midClick;
 let rightClick;
-
+let votes = [];
+let views = [];
 const section1 = document.getElementById('pole');
 const btn = document.createElement('button');
 btn.setAttribute('id', 'pi')
@@ -38,7 +39,7 @@ for (let i = 0; i < products.length; i++) {
   new Product(products[i]);
 }
 
-
+let arr1=[];
 function render() {
 
 
@@ -47,7 +48,7 @@ function render() {
   leftImage.src = Product.all[leftClick].path;
   leftImage.alt = Product.all[leftClick].name;
   leftImage.title = Product.all[leftClick].name;
-
+  arr1.push(leftClick);
   //mid
   midClick = randomNumber(0, Product.all.length - 1);
   while (leftClick === midClick) {
@@ -56,7 +57,7 @@ function render() {
   midImage.src = Product.all[midClick].path;
   midImage.alt = Product.all[midClick].name;
   midImage.title = Product.all[midClick].name;
-
+   arr1.push(rightClick);
   //right
   rightClick = randomNumber(0, Product.all.length - 1);
   while (leftClick === rightClick || midClick === rightClick) {
@@ -65,13 +66,37 @@ function render() {
   rightImage.src = Product.all[rightClick].path;
   rightImage.alt = Product.all[rightClick].name;
   rightImage.title = Product.all[rightClick].name;
-
-  
+arr1.push(rightClick);
 }
 
+// I will Try this ,,,Took so much time thinking and did not come with anything else 
+function render2(){
+  render();
+Product.all.length.push(arr1);
+let defffffff= Product.all.filter(x => arr1.indexOf(x)=== -1);
 
+let leftClick1 = randomNumber(0, defffffff.length - 1);
+leftImage.src = defffffff[leftClick1].path;
+leftImage.alt = defffffff[leftClick1].name;
+leftImage.title = defffffff[leftClick1].name;
 
+let midClick1 = randomNumber(0, defffffff.length - 1);
+while (leftClick1 === midClick1) {
+  midClick1 = randomNumber(0, defffffff.length - 1);
+}
+midImage.src = defffffff[midClick1].path;
+midImage.alt = defffffff[midClick1].name;
+midImage.title = defffffff[midClick1].name;
 
+let rightClick1 = randomNumber(0, defffffff.length - 1);
+while (leftClick1 === rightClick1 || midClick1 === rightClick1) {
+  rightClick1 = randomNumber(0, defffffff.length - 1);
+}
+rightImage.src = defffffff[rightClick1].path;
+rightImage.alt = defffffff[rightClick1].name;
+rightImage.title = defffffff[rightClick1].name;
+
+}
 imagesSection.addEventListener('click', result);
 
 let counter = 25;
@@ -125,14 +150,46 @@ function ulFunction() {
   const ulEl = document.createElement('ul');
   section1.appendChild(ulEl);
   for (let i = 0; i < products.length; i++) {
-
+    votes.push(Product.all[i].votes);
+    views.push(Product.all[i].views)
     let liEl = document.createElement('li');
     ulEl.appendChild(liEl);
 
     liEl.textContent = `Name: ${products[i]},       Votes are: ${Product.all[i].votes},         Views are: ${Product.all[i].views}`
+    chartRender();
   }
 
 }
-
-
 render();
+render2();
+
+function chartRender() {
+  let ctx = document.getElementById('myChart').getContext('2d');
+  let chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+      labels: products,
+      datasets: [{
+        label: 'Products Votes',
+        backgroundColor: 'red',
+        borderColor: 'rgb(255, 99, 132)',
+        data: votes
+      },
+      {
+        label: 'Products Views',
+        backgroundColor: 'yellow',
+        borderColor: 'rgb(255, 99, 132)',
+        data: views
+      }]
+    },
+  
+    // Configuration options go here
+    options: {}
+  });
+}
+
+
+
