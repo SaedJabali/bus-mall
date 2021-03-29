@@ -15,10 +15,9 @@ section1.appendChild(btn);
 document.getElementById('pi').style.visibility = 'hidden';
 btn.textContent = 'Show Result';
 
-const products = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass',
-];
-// const productextensions = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg',
-// ];
+// const products = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+
+const products = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 
 const leftImage = document.getElementById('left-image');
 const rightImage = document.getElementById('right-image');
@@ -28,7 +27,7 @@ const imagesSection = document.getElementById('images-section');
 
 function Product(name) {
   this.name = name;
-  this.path = `./assets/${name}.jpg`;
+  this.path = `./assets/${name}`;
   this.votes = 0;
   this.views = 0;
   Product.all.push(this);
@@ -69,7 +68,6 @@ function render() {
 
   
 }
-
 
 
 
@@ -138,4 +136,3 @@ function ulFunction() {
 
 
 render();
-
