@@ -7,15 +7,17 @@ function randomNumber(min, max) {
 let leftClick;
 let midClick;
 let rightClick;
-const section1= document.getElementById('pole');
-const btn = document.createElement('button');
-btn.setAttribute('id','pi')
-section1.appendChild(btn);
-document.getElementById('pi').style.visibility='hidden';
-btn.textContent='Show Result';
 
-const products = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass',
-];
+const section1 = document.getElementById('pole');
+const btn = document.createElement('button');
+btn.setAttribute('id', 'pi')
+section1.appendChild(btn);
+document.getElementById('pi').style.visibility = 'hidden';
+btn.textContent = 'Show Result';
+
+// const products = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+
+const products = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 
 const leftImage = document.getElementById('left-image');
 const rightImage = document.getElementById('right-image');
@@ -25,62 +27,54 @@ const imagesSection = document.getElementById('images-section');
 
 function Product(name) {
   this.name = name;
-  this.path = `./assets/${name}.jpg`;
+  this.path = `./assets/${name}`;
   this.votes = 0;
   this.views = 0;
   Product.all.push(this);
 }
 Product.all = [];
-// console.log(Product.all);
 
 for (let i = 0; i < products.length; i++) {
   new Product(products[i]);
 }
 
-console.table(Product.all);
 
 function render() {
 
 
   //left
   leftClick = randomNumber(0, Product.all.length - 1);
-  if (leftClick!==midClick&&leftClick!==rightClick){
   leftImage.src = Product.all[leftClick].path;
   leftImage.alt = Product.all[leftClick].name;
   leftImage.title = Product.all[leftClick].name;
-  }else{
-    leftClick = randomNumber(0, Product.all.length - 1);
-  }
 
   //mid
   midClick = randomNumber(0, Product.all.length - 1);
-  if (midClick!==leftClick && midClick!==rightClick){
+  while (leftClick === midClick) {
+    midClick = randomNumber(0, Product.all.length - 1);
+  }
   midImage.src = Product.all[midClick].path;
   midImage.alt = Product.all[midClick].name;
   midImage.title = Product.all[midClick].name;
-  }else {
-    midClick = randomNumber(0, Product.all.length - 1);
-  }
+
   //right
   rightClick = randomNumber(0, Product.all.length - 1);
-  if (rightClick!==midClick&& rightClick!==leftClick){
+  while (leftClick === rightClick || midClick === rightClick) {
+    rightClick = randomNumber(0, Product.all.length - 1);
+  }
   rightImage.src = Product.all[rightClick].path;
   rightImage.alt = Product.all[rightClick].name;
   rightImage.title = Product.all[rightClick].name;
-  }else {
-    rightClick = randomNumber(0, Product.all.length - 1);
-  }
-  // if (randomNumber(0,Product.all-1) >= leftClick || midClick || rightClick){
 
-  //   randomNumber(0,Product.all-1) += 1;
-  //  }
+  
 }
 
-//  render();
+
+
 
 imagesSection.addEventListener('click', result);
 
-let counter = 26;
+let counter = 25;
 function result(event) {
 
   if (event.target.id !== 'images-section') {
@@ -118,8 +112,11 @@ function result(event) {
   
   
   
-  if (counter == 20) {
-    document.getElementById('pi').style.visibility='visible';
+  if (counter == 1) {
+    imagesSection.removeEventListener('click', result);
+    document.getElementById('pi').style.visibility = 'visible';
+  } else {
+    document.getElementById('pi').style.visibility = 'hidden';
   }
 }
 btn.addEventListener('click', ulFunction);
@@ -127,14 +124,15 @@ btn.addEventListener('click', ulFunction);
 function ulFunction() {
   const ulEl = document.createElement('ul');
   section1.appendChild(ulEl);
-  for (let i = 0; i < products.length; i++){
+  for (let i = 0; i < products.length; i++) {
+
     let liEl = document.createElement('li');
     ulEl.appendChild(liEl);
 
     liEl.textContent = `Name: ${products[i]},       Votes are: ${Product.all[i].votes},         Views are: ${Product.all[i].views}`
   }
+
 }
 
 
 render();
-
