@@ -69,34 +69,34 @@ function render() {
 arr1.push(rightClick);
 }
 
-// I will Try this ,,,Took so much time thinking and did not come with anything else 
-function render2(){
-  render();
-Product.all.length.push(arr1);
-let defffffff= Product.all.filter(x => arr1.indexOf(x)=== -1);
+// // I will Try this ,,,Took so much time thinking and did not come with anything else 
+// function render2(){
+//   render();
+// Product.all.length.push(arr1);
+// let defffffff= Product.all.filter(x => arr1.indexOf(x)=== -1);
 
-let leftClick1 = randomNumber(0, defffffff.length - 1);
-leftImage.src = defffffff[leftClick1].path;
-leftImage.alt = defffffff[leftClick1].name;
-leftImage.title = defffffff[leftClick1].name;
+// let leftClick1 = randomNumber(0, defffffff.length - 1);
+// leftImage.src = defffffff[leftClick1].path;
+// leftImage.alt = defffffff[leftClick1].name;
+// leftImage.title = defffffff[leftClick1].name;
 
-let midClick1 = randomNumber(0, defffffff.length - 1);
-while (leftClick1 === midClick1) {
-  midClick1 = randomNumber(0, defffffff.length - 1);
-}
-midImage.src = defffffff[midClick1].path;
-midImage.alt = defffffff[midClick1].name;
-midImage.title = defffffff[midClick1].name;
+// let midClick1 = randomNumber(0, defffffff.length - 1);
+// while (leftClick1 === midClick1) {
+//   midClick1 = randomNumber(0, defffffff.length - 1);
+// }
+// midImage.src = defffffff[midClick1].path;
+// midImage.alt = defffffff[midClick1].name;
+// midImage.title = defffffff[midClick1].name;
 
-let rightClick1 = randomNumber(0, defffffff.length - 1);
-while (leftClick1 === rightClick1 || midClick1 === rightClick1) {
-  rightClick1 = randomNumber(0, defffffff.length - 1);
-}
-rightImage.src = defffffff[rightClick1].path;
-rightImage.alt = defffffff[rightClick1].name;
-rightImage.title = defffffff[rightClick1].name;
+// let rightClick1 = randomNumber(0, defffffff.length - 1);
+// while (leftClick1 === rightClick1 || midClick1 === rightClick1) {
+//   rightClick1 = randomNumber(0, defffffff.length - 1);
+// }
+// rightImage.src = defffffff[rightClick1].path;
+// rightImage.alt = defffffff[rightClick1].name;
+// rightImage.title = defffffff[rightClick1].name;
 
-}
+// }
 imagesSection.addEventListener('click', result);
 
 let counter = 25;
@@ -144,6 +144,7 @@ function result(event) {
     document.getElementById('pi').style.visibility = 'hidden';
   }
 }
+localStorage.setItem('Products', JSON.stringify(Product.all));
 btn.addEventListener('click', ulFunction);
 
 function ulFunction() {
@@ -161,7 +162,7 @@ function ulFunction() {
 
 }
 render();
-render2();
+// render2();
 
 function chartRender() {
   let ctx = document.getElementById('myChart').getContext('2d');
@@ -193,3 +194,14 @@ function chartRender() {
 
 
 
+function totalVotes() {
+  const data = localStorage.getItem('Products');
+
+  if (data) {
+      const objData = JSON.parse(data);
+      Product.all = objData;
+      console.log(localStorage.getItem('Products'));
+      render();
+  }
+}
+totalVotes();
