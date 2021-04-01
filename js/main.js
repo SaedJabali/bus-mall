@@ -144,7 +144,6 @@ function result(event) {
     document.getElementById('pi').style.visibility = 'hidden';
   }
 }
-localStorage.setItem('Products', JSON.stringify(Product.all));
 btn.addEventListener('click', ulFunction);
 
 function ulFunction() {
@@ -155,9 +154,11 @@ function ulFunction() {
     views.push(Product.all[i].views)
     let liEl = document.createElement('li');
     ulEl.appendChild(liEl);
-
+    
     liEl.textContent = `Name: ${products[i]},       Votes are: ${Product.all[i].votes},         Views are: ${Product.all[i].views}`
+    // localStorage.setItem('Products', JSON.stringify(Product.all));
     chartRender();
+    settingItem();
   }
 
 }
@@ -193,15 +194,20 @@ function chartRender() {
 }
 
 
-
-function totalVotes() {
-  const data = localStorage.getItem('Products');
-
-  if (data) {
-      const objData = JSON.parse(data);
-      Product.all = objData;
-      console.log(localStorage.getItem('Products'));
-      render();
-  }
+function settingItem() {
+  let data = JSON.stringify(Product.all);
+  // console.log(data);
+  localStorage.setItem('Product', data);
 }
-totalVotes();
+
+function gettingItem() {
+  let stringObj = localStorage.getItem('Product');
+  let normalObj = JSON.parse(stringObj);
+  if (normalObj !== null) {
+    Product.all = normalObj;
+  }
+
+}
+
+
+gettingItem();
